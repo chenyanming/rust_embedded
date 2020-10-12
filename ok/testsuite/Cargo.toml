@@ -1,0 +1,55 @@
+[package]
+authors = ["damon.chan <damon.chan@abc.com>"]
+name = "testsuite"
+publish = false
+edition = "2018"
+version = "0.1.0"
+
+[[test]]
+name = "test"
+harness = false
+
+[dependencies.defmt]
+git = "https://github.com/knurling-rs/defmt"
+branch = "main"
+
+[dependencies.defmt-rtt]
+git = "https://github.com/knurling-rs/defmt"
+branch = "main"
+
+[dependencies.panic-probe]
+git = "https://github.com/knurling-rs/probe-run"
+branch = "main"
+# enable the `print-defmt` feature for more complete test output
+features = ["print-defmt"]
+
+[dependencies.stm32f4xx-hal]
+version = "0.8.3"
+features = ["rt", "stm32f407"] # replace the model of your microcontroller here
+
+[dependencies]
+ok = { path = ".." }
+embedded-hal = "0.2"
+nb = "0.1.2"
+cortex-m = "0.6.3"
+cortex-m-rt = "0.6.12"
+heapless = "0.5.5"
+
+[dev-dependencies]
+ok = { path = ".." }
+
+[features]
+# set logging levels here
+default = [
+  # in tests, enable all logs
+  "defmt-trace",
+  # "dependency-a/defmt-trace",
+]
+
+# do NOT modify these features
+defmt-default = []
+defmt-trace = []
+defmt-debug = []
+defmt-info = []
+defmt-warn = []
+defmt-error = []
